@@ -11,13 +11,13 @@ def primitiver_polynome(polynome):
     return polynome_integre
 
 def integrer_analytique(polynome,interval):
-    return(calculer_valeur_polynome(primitiver_polynome(polynome),interval[1])*interval[1]-calculer_valeur_polynome(primitiver_polynome(polynome),interval[0])*interval[0])
+    return(calculer_valeur_polynome(primitiver_polynome(polynome),interval[1])-calculer_valeur_polynome(primitiver_polynome(polynome),interval[0]))
 
 def integrer_methode_rectangle(polynome,nb_segment,interval):
-    longeur_segment=((interval[1]-interval[0])/nb_segment)
+    longeur_segment=(abs(interval[1]-interval[0])/nb_segment)
     integration=0
     for i in range(nb_segment):
-        aire_rectangle=(calculer_valeur_polynome(polynome,(i+1/2)*longeur_segment))*longeur_segment
+        aire_rectangle=(calculer_valeur_polynome(polynome,interval[0]+(i+1/2)*longeur_segment))*longeur_segment
         integration+=aire_rectangle
     return integration
 
