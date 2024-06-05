@@ -1,8 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import timeit
-import time
-
 
 def integrer_methode_trapeze_numpy(polynome, nb_segment, interval):
     x = np.linspace(interval[0], interval[1], nb_segment + 1)
@@ -60,6 +57,9 @@ def calculer_erreur_integartion(polynome, nb_segment, interval, fonction_integra
     return (f"l'erreur d'intégration est de {erreur_integartion * 100} %")
 
 
-print(integrer_methode_trapeze([1, 1, 1, 1], 100000,[0, 1]))
+print(integrer_methode_rectangle([1, 1, 1, 1], 100000,[0, 1]))
 print(integrer_methode_trapeze_numpy([1, 1, 1, 1], 100000, [0, 1]))
 print(calculer_erreur_integartion([1, 1, 1, 1], 100000, [0, 1], integrer_methode_trapeze))
+
+
+print(timeit.timeit(lambda :integrer_methode_trapeze_numpy([1, 1, 1, 1], 100000, [0, 1]), number=1))
