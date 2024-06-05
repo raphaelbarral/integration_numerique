@@ -26,5 +26,5 @@ def calculer_erreur_integartion(polynome,nb_segment,interval):
     return (f"l'erreur d'intégration est de {erreur_integartion*100} %")
 
 print(integrer_analytique([1,1,1,1],[0,1]))
-print(integrer_methode_rectangle([1,1,1,1],100000,[0,1]))
-print(calculer_erreur_integartion([1,1,1,1],100000,[0,1]))
+print(integrer_methode_rectangle([1,1,1,1],100,[0,1]))
+print(calculer_erreur_integartion([1,1,1,1],100,[0,1]))
