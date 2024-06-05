@@ -57,14 +57,13 @@ def integrer_methode_rectangle_numpy(polynome, nb_segment, interval):
     return T
 
 
-def calculer_erreur_integartion(polynome, nb_segment, interval):
-    erreur_integartion = (integrer_analytique(polynome, interval) - integrer_methode_rectangle(polynome, nb_segment,
+def calculer_erreur_integartion(polynome, nb_segment, interval, fonction_integral):
+    erreur_integartion = (integrer_analytique(polynome, interval) - fonction_integral(polynome, nb_segment,
                                                                                                interval)) / integrer_analytique(
         polynome, interval)
     return (f"l'erreur d'intégration est de {erreur_integartion * 100} %")
 
 
-print(integrer_methode_rectangle([1, 1, 1, 1], 100000,[0, 1]))
-print(integrer_methode_rectangle_numpy([1, 1, 1, 1], 100000, [0, 1]))
-print(calculer_erreur_integartion([1, 1, 1, 1], 100000, [0, 1]))
-print(integrer_methode_trapeze((1,1,1,1), 10, (0,1)))
+print(integrer_methode_trapeze([1, 1, 1, 1], 100000,[0, 1]))
+print(integrer_methode_trapeze_numpy([1, 1, 1, 1], 100000, [0, 1]))
+print(calculer_erreur_integartion([1, 1, 1, 1], 100000, [0, 1], integrer_methode_trapeze))
