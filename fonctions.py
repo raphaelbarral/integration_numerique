@@ -23,29 +23,25 @@ def integrer_methode_trapeze(polynome, nb_segment, interval):
 
 def calculer_valeur_polynome(polynome, x):
     valeur = 0
-    for i in range(0, len(polynome)):
-        valeur += polynome[i] * x ** (i)
+    for i in range(0,len(polynome)):
+        valeur+=polynome[i]*x**(i)
     return valeur
 
-
 def primitiver_polynome(polynome):
-    polynome_integre = [0]
+    polynome_integre=[0]
     for i in range(len(polynome)):
-        polynome_integre.append(polynome[i] / (i + 1))
+        polynome_integre.append(polynome[i]/(i+1))
     return polynome_integre
 
+def integrer_analytique(polynome,interval):
+    return(calculer_valeur_polynome(primitiver_polynome(polynome),interval[1])-calculer_valeur_polynome(primitiver_polynome(polynome),interval[0]))
 
-def integrer_analytique(polynome, interval):
-    return (calculer_valeur_polynome(primitiver_polynome(polynome), interval[1]) * interval[
-        1] - calculer_valeur_polynome(primitiver_polynome(polynome), interval[0]) * interval[0])
-
-
-def integrer_methode_rectangle(polynome, nb_segment, interval):
-    longeur_segment = ((interval[1] - interval[0]) / nb_segment)
-    integration = 0
+def integrer_methode_rectangle(polynome,nb_segment,interval):
+    longeur_segment=(interval[1]-interval[0])/nb_segment
+    integration=0
     for i in range(nb_segment):
-        aire_rectangle = (calculer_valeur_polynome(polynome, (i + 1 / 2) * longeur_segment)) * longeur_segment
-        integration += aire_rectangle
+        aire_rectangle=(calculer_valeur_polynome(polynome,interval[0]+(i+1/2)*longeur_segment))*longeur_segment
+        integration+=aire_rectangle
     return integration
 
 
