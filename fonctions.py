@@ -55,11 +55,3 @@ def calculer_erreur_integartion(polynome, nb_segment, interval, fonction_integra
                                                                                                interval)) / integrer_analytique(
         polynome, interval)
     return (f"l'erreur d'intégration est de {erreur_integartion * 100} %")
-
-
-print(integrer_methode_rectangle([1, 1, 1, 1], 100000,[0, 1]))
-print(integrer_methode_trapeze_numpy([1, 1, 1, 1], 100000, [0, 1]))
-print(calculer_erreur_integartion([1, 1, 1, 1], 100000, [0, 1], integrer_methode_trapeze))
-
-
-print(timeit.timeit(lambda :integrer_methode_trapeze_numpy([1, 1, 1, 1], 100000, [0, 1]), number=1))
