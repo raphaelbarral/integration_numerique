@@ -1,3 +1,4 @@
+import timeit
 def calculer_valeur_polynome(polynome,x):
     valeur = 0
     for i in range(0,len(polynome)):
@@ -22,5 +23,5 @@ def integrer_methode_rectangle(polynome,nb_segment,interval):
     return integration
 
 def calculer_erreur_integartion(polynome,nb_segment,interval):
-    erreur_integartion=(integrer_analytique(polynome,interval)-integrer_methode_rectangle(polynome,nb_segment,interval))/integrer_analytique(polynome,interval)
-    return (f"l'erreur d'intégration est de {erreur_integartion*100} %")
+    erreur_integration=(integrer_analytique(polynome,interval)-integrer_methode_rectangle(polynome,nb_segment,interval))/integrer_analytique(polynome,interval)
+    return erreur_integration
