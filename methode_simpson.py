@@ -7,26 +7,31 @@ nb_de_segment = []
 temps = []
 nb_de_segment2 = []
 temps2 = []
-def f(polynome,x):
+
+
+def f(polynome, x):
     valeur = 0
-    for i in range(0,len(polynome)):
-        valeur += polynome[i]*x**(i)
+    for i in range(0, len(polynome)):
+        valeur += polynome[i] * x ** (i)
     return valeur
 
-def calculer_nombre_echantillon(intervalle,n):
+
+def calculer_nombre_echantillon(intervalle, n):
     x = np.linspace(intervalle[0], intervalle[1], n)
     return x
 
-def calculer_simpson(polynome,intervalle,n):
+
+def calculer_simpson(polynome, intervalle, n):
     somme = 0
-    pas = (intervalle[1]-intervalle[0])/n
+    pas = (intervalle[1] - intervalle[0]) / n
     x1 = intervalle[0]
     x2 = intervalle[0] + pas
     for i in range(n):
-        somme += (f(polynome,x1)+4*f(polynome,(x1+x2)/2)+f(polynome,x2))/6
+        somme += (f(polynome, x1) + 4 * f(polynome, (x1 + x2) / 2) + f(polynome, x2)) / 6
         x1 += pas
         x2 += pas
-    return pas*somme
+    return pas * somme
+
 
 def calculer_simpson_numpy(polynome, intervalle, n):
     x = calculer_nombre_echantillon(intervalle, n)
@@ -34,9 +39,11 @@ def calculer_simpson_numpy(polynome, intervalle, n):
     resultat = scipy.integrate.simpson(y, x=x)
     return resultat
 
+
 def calculer_erreur(resulat1, resultat2):
     erreur = abs(resulat1 - resultat2)
     return erreur
+
 
 def calculer_temps_simpson_numpy(n, polynome, intervalle):
     global nb_de_segment2, temps2
@@ -49,6 +56,8 @@ def calculer_temps_simpson_numpy(n, polynome, intervalle):
     temps2.pop(0)
     nb_de_segment2.pop(0)
     return
+
+
 def calculer_temps_simpson(n, polynome, intervalle):
     global nb_de_segment, temps
     for i in range(1, n):
@@ -58,6 +67,8 @@ def calculer_temps_simpson(n, polynome, intervalle):
         nb_de_segment.append(i)
         temps.append(toc - tic)
     return
+
+
 # Fonction pour afficher les résultats
 def afficher():
     plt.rcParams['figure.autolayout'] = True
@@ -73,15 +84,15 @@ def afficher():
     plt.show()
     return
 
-polynome = [1,1,1,1]
-intervalle = [0,1]
+
+polynome = [1, 1, 1, 1]
+intervalle = [0, 1]
 n = 1000
 
-calculer_temps_simpson_numpy(n,polynome,intervalle)
-calculer_temps_simpson(n,polynome,intervalle)
+calculer_temps_simpson_numpy(n, polynome, intervalle)
+calculer_temps_simpson(n, polynome, intervalle)
 afficher()
-
 
 #print(f"\nRésultat de l'intégration par la méthode de simpson en Python de base est de: {r2}")
 #print(f"Résultat de l'intégration par à l'aide de NumPy: {r1}")
-#print(f"Erreur = {calculer_erreur(r1, r2)}, soit : {(calculer_erreur(r1, r2)/abs(r1))*100} %")
+#print(f"Erreur = {calculer_erreur(r1, r2)}, soit : {(calculer_erreur(r1, r2) / abs(r1)) * 100} %")
