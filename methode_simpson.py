@@ -18,7 +18,7 @@ def calculer_nombre_echantillon(intervalle, n):
     x = np.linspace(intervalle[0], intervalle[1], n)
     return x
 
-def calculer_simpson(polynome, intervalle, n):
+def calculer_simpson(polynome, n, intervalle):
     somme = 0
     pas = (intervalle[1] - intervalle[0]) / n
     x1 = intervalle[0]
@@ -29,7 +29,7 @@ def calculer_simpson(polynome, intervalle, n):
         x2 += pas
     return pas * somme
 
-def calculer_simpson_numpy(polynome, intervalle, n):
+def calculer_simpson_numpy(polynome, n, intervalle):
     x = calculer_nombre_echantillon(intervalle, n)
     y = f(polynome, x)
     resultat = scipy.integrate.simpson(y, x=x)
@@ -43,7 +43,7 @@ def calculer_temps_simpson_numpy(n, polynome, intervalle):
     global nb_de_segment2, temps2
     for i in range(1, n):
         tic2 = perf_counter()
-        calculer_simpson_numpy(polynome, intervalle, i)
+        calculer_simpson_numpy(polynome, i, intervalle)
         toc2 = perf_counter()
         nb_de_segment2.append(i)
         temps2.append(toc2 - tic2)
@@ -56,7 +56,7 @@ def calculer_temps_simpson(n, polynome, intervalle):
     global nb_de_segment, temps
     for i in range(1, n):
         tic = perf_counter()
-        calculer_simpson(polynome, intervalle, i)
+        calculer_simpson(polynome, i, intervalle)
         toc = perf_counter()
         nb_de_segment.append(i)
         temps.append(toc - tic)
@@ -97,7 +97,7 @@ def afficher_convergence_simpson(polynome, intervalle, n):
     nb_de_segments3 = []
     for i in range(4, n, 2):
         val_exact = integrer_analytique(polynome,intervalle)
-        err = calculer_erreur(val_exact, calculer_simpson_numpy(polynome, intervalle, i))
+        err = calculer_erreur(val_exact, calculer_simpson_numpy(polynome, i, intervalle))
         erreurs.append(err)
         nb_de_segments3.append(i)
 
@@ -115,16 +115,3 @@ def afficher_convergence_simpson(polynome, intervalle, n):
     plt.legend()
     plt.show()
     return
-
-polynome = [1, 1, 1, 1]
-intervalle = [0, 1]
-n = 1000
-
-afficher_convergence_simpson(polynome, intervalle, n)
-calculer_temps_simpson_numpy(n, polynome, intervalle)
-calculer_temps_simpson(n, polynome, intervalle)
-afficher_temps_execution()
-
-#print(f"\nRésultat de l'intégration par la méthode de simpson en Python de base est de: {r2}")
-#print(f"Résultat de l'intégration par à l'aide de NumPy: {r1}")
-#print(f"Erreur = {calculer_erreur(r1, r2)}, soit : {(calculer_erreur(r1, r2) / abs(r1)) * 100} %")

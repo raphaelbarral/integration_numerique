@@ -3,6 +3,7 @@ import timeit
 import numpy as np
 import matplotlib.pyplot as plt
 from fonctions import *
+from methode_simpson import *
 
 #Partie méthode des rectangles
 #polynome=[float(input("X0")),float(input("X1")),float(input("X2")),float(input("X3"))]
@@ -96,3 +97,45 @@ plt.yscale('log')
 plt.xscale('log')
 plt.show()
 
+#Question 2.3.1
+print(f"l'intégration avec la méthode de Simpson nous donne {calculer_simpson(polynome,nb_segment,interval)}")
+print(f"l'intégration avec la méthode de Simpson numpy nous donne {calculer_simpson_numpy(polynome,nb_segment,interval)}")
+
+#Question 2.3.2
+print(f"l'erreur avec la méthode de Simpson est {calculer_erreur_integartion(polynome,nb_segment,interval, calculer_simpson)} % ")
+print(f"l'erreur avec la méthode des Simpson numpy est {calculer_erreur_integartion(polynome,nb_segment,interval, calculer_simpson_numpy)} % ")
+
+print(f"Le temps d'exécution est {timeit.timeit(lambda :calculer_simpson(polynome, nb_segment, interval), number=1000)/1000} secondes pour la méthode de Simpson")
+print(f"Le temps d'exécution est {timeit.timeit(lambda :calculer_simpson_numpy(polynome, nb_segment, interval), number=1000)/1000} secondes pour la méthode de Simpson")
+
+#Question 2.2.3
+results_simp = []
+nb_seg_simp= []
+for i in range(10):
+    nb_seg_simp.append(2 ** (i + 1))
+    results_simp.append(calculer_erreur_integartion(polynome, nb_seg_trap[i], interval, calculer_simpson))
+
+results = np.array([results_rect , results_trap, results_simp]).transpose()
+nb_seg = np.array([nb_seg_rect, nb_seg_trap, nb_seg_simp]).transpose()
+
+plt.plot(nb_seg, results)
+plt.yscale('log')
+plt.xscale('log')
+plt.show()
+
+#Question 2.2.4
+temps_simp_numpy = []
+temps_simp = []
+nb_seg = []
+for i in range(10):
+    nb_seg.append(2 ** (i + 1))
+    temps_simp.append(timeit.timeit(lambda :calculer_simpson(polynome, nb_seg[i], interval), number=1000)/1000)
+    temps_simp_numpy.append(timeit.timeit(lambda :calculer_simpson_numpy(polynome, nb_seg[i], interval), number=1000)/1000)
+
+results = np.array([temps_trap , temps_trap_numpy]).transpose()
+nb_seg = np.array([nb_seg, nb_seg]).transpose()
+
+plt.plot(nb_seg, results)
+plt.yscale('log')
+plt.xscale('log')
+plt.show()
