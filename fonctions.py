@@ -54,4 +54,4 @@ def calculer_erreur_integartion(polynome, nb_segment, interval, fonction_integra
     erreur_integartion = (integrer_analytique(polynome, interval) - fonction_integral(polynome, nb_segment,
                                                                                                interval)) / integrer_analytique(
         polynome, interval)
-    return (f"l'erreur d'intégration est de {erreur_integartion * 100} %")
+    return abs(erreur_integartion)
