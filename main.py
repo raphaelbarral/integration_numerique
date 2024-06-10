@@ -2,14 +2,9 @@ from fonctions import *
 
 plot_init()
 
-#Partie méthode des rectangles
-#polynome=[float(input("X0")),float(input("X1")),float(input("X2")),float(input("X3"))]
-#interval=[float(input("borne intégration inférieur")),float(input("borne intégration supérieur"))]
-#nb_segment=int(input("nombre de segment pour l intégration avec méthode des rectangle"))
-
-polynome = [1, 1, 1, 1]
-interval=[0, 10]
-nb_segment = 50
+polynome=[float(input("X0")),float(input("X1")),float(input("X2")),float(input("X3"))]
+interval=[float(input("borne intégration inférieur")),float(input("borne intégration supérieur"))]
+nb_segment=int(input("nombre de segment pour l intégration avec méthode des rectangle"))
 
 #Question 2.1.1.1
 print(f"l'intégration analytique nous donne {integrer_analytique(polynome,interval)}")
