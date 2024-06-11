@@ -1,10 +1,10 @@
 from fonctions import *
 
 plot_init()
-
-polynome = [float(input("X0")), float(input("X1")), float(input("X2")), float(input("X3"))]
+print("Donner les valeurs du polynome a,b,c et d; tel que P(X) = a + b X + c X**2 + d X**3 :")
+polynome = [float(input("a =")), float(input("b =")), float(input("c =")), float(input("d ="))]
 interval = [float(input("borne intégration inférieur")), float(input("borne intégration supérieur"))]
-nb_segment = int(input("nombre de segment pour l intégration avec méthode des rectangle"))
+nb_segment = int(input("nombre de segment d'intégration"))
 
 # Question 2.1.1.1
 print(f"l'intégration analytique nous donne {integrer_analytique(polynome,interval)}")
@@ -25,7 +25,7 @@ print(f"l'intégration avec la méthode des rectangles numpy nous donne {integre
 print(f"Le temps d'exécution est {timeit.timeit(lambda :integrer_methode_rectangle_numpy(polynome, nb_segment, interval), number=10)/10} secondes pour la méthode des rectangles numpy")
 
 plot_ajouter_temps(integrer_methode_rectangle, polynome, interval, 'Python de base', 'blue')
-plot_ajouter_temps(integrer_methode_rectangle_numpy, polynome, interval, 'numPy', 'red')
+plot_ajouter_temps(integrer_methode_rectangle_numpy, polynome, interval, 'vectorisée', 'red')
 plot_afficher_temps("Temps d'execution de la méthode des rectangle en fonction du nombre de segments")
 
 # Question 2.2.1

@@ -11,7 +11,7 @@ def f(polynome, x):
     return valeur
 
 def primitiver_polynome(polynome):
-    polynome_integre=[0]
+    polynome_integre=[0]#on fait l hypothèse que la constante d intégration est 0
     for i in range(len(polynome)):
         polynome_integre.append(polynome[i]/(i+1))
     return polynome_integre
